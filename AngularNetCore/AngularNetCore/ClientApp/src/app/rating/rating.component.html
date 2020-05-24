@@ -1,0 +1,48 @@
+<h1>RATE A MOVIE</h1>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<form [formGroup]="ratingForm" (ngSubmit)="onSubmit()">
+  <div class="card m-3">
+    <h5 class="card-header">Provide a rating for your favorite movie!!!</h5>
+    <div class="card-body border-bottom">
+      <div class="form-row">
+        <div class="form-group col-6">
+          <label>Movie Name</label>
+          <input type="text" formControlName="movieName" class="form-control" [ngClass]="{ 'is-invalid': submitted && ratingForm.controls.movieName.errors }" />
+          <div *ngIf="ratingForm.controls.movieName.errors.required">Movie Name is required</div>
+        </div>
+      </div>
+
+
+      <div class="form-row">
+        <div class="form-group col-6">
+          <label>Comments</label>
+          <input type="text" formControlName="comments" class="form-control" [ngClass]="{ 'is-invalid': submitted && ratingForm.controls.comments.errors }" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-6">
+          <label>Your Rating</label>
+          <div class="row">
+            <div class="col-sm-12">
+              <ul class="list-inline rating-list"
+                  *ngFor="let star of stars" style="display: inline-block">
+                <li (click)="countStar(star)"
+                    [ngClass]="{'selected': (star <= selectedValue)}">
+                  <i class="fa fa-star"></i>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-footer text-center border-top-0">
+      <button class="btn btn-primary mr-1">Add</button>
+      <button class="btn btn-secondary mr-1" type="reset" (click)="onReset()">Reset</button>
+      <button class="btn btn-secondary" type="button" (click)="onClear()">Clear</button>
+    </div>
+
+  </div>
+</form>
